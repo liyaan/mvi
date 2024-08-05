@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">MyCompose</string>
+    <string name="home">首页</string>
+    <string name="ClassList">分类</string>
+    <string name="StudyCenter">购物车</string>
+    <string name="OneCenter">我的</string>
+</resources>
