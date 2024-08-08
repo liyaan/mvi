@@ -32,6 +32,7 @@
         <activity android:name=".ProjectListDetailsActivity"></activity>
         <activity android:name=".TabRowActivity"></activity>
         <activity android:name=".AnimatingActivity"></activity>
+        <activity android:name=".EventsActivity"></activity>
     </application>
 
 </manifest>
