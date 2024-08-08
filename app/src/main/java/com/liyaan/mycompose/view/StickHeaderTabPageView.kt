@@ -2,13 +2,18 @@ package com.liyaan.mycompose.view
 
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyItemScope
+import androidx.compose.foundation.pager.HorizontalPager
+import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.material.ScrollableTabRow
 
 import androidx.compose.material.Text
@@ -33,7 +38,7 @@ import kotlinx.coroutines.launch
 @Composable
 fun StickHeaderTabPageView(){
     val itemOnes:MutableList<String> = remember {
-        mutableStateListOf()
+        mutableStateListOf("aaaaa","bbbbbb","ccccccc","dddddd")
     }
     var state = remember { mutableStateOf(0) }
     val titles = listOf("标签1", "标签2", "标签3", "标签4", "这是很长的标签5")
@@ -86,6 +91,75 @@ fun StickHeaderTabPageView(){
     }
 }
 
+@OptIn(ExperimentalFoundationApi::class)
+@Composable
+fun StickHeaderTabHorizontalPageView(){
+    val itemOnes:MutableList<String> = remember {
+        mutableStateListOf("aaaaa","bbbbbb","ccccccc","dddddd")
+    }
+    val page = rememberPagerState(
+        0
+    )
+    val coroutineScope = rememberCoroutineScope()
+    val titles = listOf("标签1", "标签2", "标签3", "标签4", "这是很长的标签5")
+    StickHeaderTabPage(
+        content = {
+            ScrollableTabRow(
+                selectedTabIndex = page.currentPage,
+                modifier = Modifier.wrapContentWidth(),
+                edgePadding = 16.dp
+            ) {
+                titles.forEachIndexed { index, title ->
+                    Tab(
+                        text = { Text(title) },
+                        selected = page.currentPage == index,
+                        onClick = {
+                            coroutineScope.launch {
+                                page.scrollToPage(index)
+                            }
+                            itemOnes.add("选中的 index = $index")
+                        }
+                    )
+                }
+            }
+        },
+        itemHeaderContent ={
+            Box(modifier = Modifier
+                .fillMaxWidth()
+                .height(200.dp)){
+                Image(
+                    painter = painterResource(id = R.mipmap.gongkaiclass_icon),
+                    contentDescription = "",
+                    contentScale = ContentScale.FillWidth
+                )
+            }
+        }
+    ) {
+        HorizontalPager(
+            pageCount = titles.size,
+            state = page,
+            modifier = Modifier
+                .fillMaxSize()
+                .background(Color.Gray)
+        ) {
+            Column(modifier = Modifier.fillMaxSize()) {
+                itemOnes.forEachIndexed { _, item ->
+                    Box(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .height(200.dp),
+                        contentAlignment = Alignment.Center
+                    ) {
+                        Text(text = item)
+                    }
+                }
+            }
+        }
+
+
+
+    }
+}
 
 
 @OptIn(ExperimentalFoundationApi::class)
@@ -111,7 +185,6 @@ fun StickHeaderTabPage(
             item {
                 itemContent()
             }
-
         }
     }
 }

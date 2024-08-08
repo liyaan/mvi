@@ -28,6 +28,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.liyaan.mycompose.ui.theme.MyComposeTheme
+import com.liyaan.mycompose.view.StickHeaderTabHorizontalPageView
 import com.liyaan.mycompose.view.StickHeaderTabPageView
 import com.liyaan.mycompose.view.TabAndPage
 
@@ -36,8 +37,16 @@ class TabRowActivity: ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             MyComposeTheme {
-//                TabView()
-                StickHeaderTabPageView()
+                //ScrollableTabRow +HorizontalPager 滑动和点击切换
+                //TabAndPage()
+                //滚动置顶
+               // StickHeaderTabPageView()
+                //滚动置顶和滑动切换
+                StickHeaderTabHorizontalPageView()
+                //TabRow 使用
+                //                TabView()
+                //ScrollableTabRow 使用
+                //ScrollableTabRowDemo()
             }
         }
     }
@@ -73,7 +82,7 @@ fun TabView(){
         Spacer(modifier = Modifier.height(20.dp))
 //        ScrollableTabRowDemo()
 
-        TabAndPage()
+
     }
    
 }

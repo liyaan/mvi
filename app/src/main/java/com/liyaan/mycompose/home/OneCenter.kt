@@ -23,6 +23,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.liyaan.mycompose.AnimatingActivity
 import com.liyaan.mycompose.R
 import com.liyaan.mycompose.TabRowActivity
 import com.liyaan.mycompose.ui.theme.BG
@@ -34,29 +35,19 @@ fun OneCenter(context: Context){
             .fillMaxSize()
             .background(BG)
     ) {
-       Row(
-           modifier = Modifier
-               .fillMaxWidth()
-               .height(60.dp)
-               .background(Color.White)
-               .padding(start = 10.dp),
-           verticalAlignment = Alignment.CenterVertically
-       ){
-            Image(
-                painter = painterResource(id = R.mipmap.home_header_photo),
-                contentDescription = "",
-            )
-           Spacer(modifier = Modifier.width(10.dp))
-           Text(text = "RowTab导航", fontSize = 16.sp)
-       }
-        itemView(){
+        itemView("用户中心", right = false)
+        itemView("RowTab导航", right = true){
             val intent = Intent(context,TabRowActivity::class.java)
+            context.startActivity(intent)
+        }
+        itemView("动画效果", right = true){
+            val intent = Intent(context,AnimatingActivity::class.java)
             context.startActivity(intent)
         }
     }
 }
 @Composable
-fun itemView(onClick:()->Unit){
+fun itemView(title:String,right:Boolean,onClick:()->Unit = {}){
     Box(
         modifier = Modifier
             .fillMaxWidth()
@@ -73,9 +64,12 @@ fun itemView(onClick:()->Unit){
             contentDescription = "",
         )
         Spacer(modifier = Modifier.width(10.dp))
-        Text(text = "用户名称", fontSize = 16.sp, modifier = Modifier.padding(start = 50.dp))
-        Icon(
-            painter = painterResource(id = R.mipmap.ceshi_jiantou),
-            contentDescription ="", modifier = Modifier.align(Alignment.CenterEnd))
+        Text(text = title, fontSize = 16.sp, modifier = Modifier.padding(start = 50.dp))
+        if (right){
+            Icon(
+                painter = painterResource(id = R.mipmap.ceshi_jiantou),
+                contentDescription ="", modifier = Modifier.align(Alignment.CenterEnd))
+        }
+
     }
 }
