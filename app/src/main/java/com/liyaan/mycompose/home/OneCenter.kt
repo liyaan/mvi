@@ -25,6 +25,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.liyaan.mycompose.AnimatingActivity
 import com.liyaan.mycompose.EventsActivity
+import com.liyaan.mycompose.OneActivity
 import com.liyaan.mycompose.R
 import com.liyaan.mycompose.TabRowActivity
 import com.liyaan.mycompose.ui.theme.BG
@@ -47,6 +48,10 @@ fun OneCenter(context: Context){
         }
         itemView("触点事件", right = true){
             val intent = Intent(context,EventsActivity::class.java)
+            context.startActivity(intent)
+        }
+        itemView("自定义布局", right = true){
+            val intent = Intent(context, OneActivity::class.java)
             context.startActivity(intent)
         }
     }
